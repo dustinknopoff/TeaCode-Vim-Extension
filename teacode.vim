@@ -1,10 +1,10 @@
 function! TeaCodeExpand()
 	" Collect data
-	let trigger  = getline( '.' )
+	let trigger  = getline( '.' ) 
 	let line     = line( '.' )
 	let filetype = &filetype
-	let cursor = getpos('.')
-    execute "normal! dd"
+	let cursor = getpos('.') " gets the current line and column
+    execute "normal! dd" " remove line expander was called on
 	" Run expand function and store the results in ob
 	let ob = system( "sh ./expand.sh -e ". filetype ." -t '". trigger ."'" )
 	" Convert command response to an object by running eval function
@@ -14,7 +14,9 @@ function! TeaCodeExpand()
 	if s:result ==? 'null'
         echo "Could not run TeaCode. Please make sure it's installed. You can download the app from https://www.apptorium.com/teacode"
     endif
+	" write to screen
 	execute "normal! i". s:result
+	" Loop through output text to determine final cursor line and column.
 python << EOF
 import vim
 string = vim.eval("s:result")
@@ -31,7 +33,7 @@ for i in string:
 EOF
 	" Set the cursor position
 	" [bufnum, lnum, col, off]
-	let newline = line + l+1
+	let newline = line + l+1 " add offset
 	let newcol = cursor[2] + c - 1
 	call setpos( '.', [0, newline, newcol, 0] )
 endfunction
