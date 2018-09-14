@@ -2,7 +2,7 @@
 
 Provides integration with TeaCode https://www.apptorium.com/teacode
 
-TeaCode is a powerful app, created to write code super fast by expanding short, dynamic code templates into the real code. It comes with a simple variable-based language that supports subexpressions, optional patterns and filters. Creating new expanders is extremely easy. TeaCode supports native editors (Xcode, TextMate, Coda, etc.) as well as Atom, Sublime Text, VSC and JetBrains IDEs (PHPStorm, AppCode, etc.)
+TeaCode is a powerful app, created to write code super fast by expanding short, dynamic code templates into the real code. It comes with a simple variable-based language that supports subexpressions, optional patterns and filters. Creating new expanders is extremely easy. TeaCode supports native editors (Xcode, TextMate, Coda, etc.) as well as Atom, Sublime Text, VSC and JetBrains IDEs (PHPStorm, AppCode, etc.) and now Vim.
 
 ![](./example.gif)
 
