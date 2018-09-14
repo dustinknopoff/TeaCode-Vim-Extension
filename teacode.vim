@@ -33,7 +33,7 @@ for i in string:
 EOF
 	" Set the cursor position
 	" [bufnum, lnum, col, off]
-	let newline = line + l+1 " add offset
+	let newline = line + l + 1 " add offset
 	let newcol = cursor[2] + c - 1
 	call setpos( '.', [0, newline, newcol, 0] )
 endfunction
