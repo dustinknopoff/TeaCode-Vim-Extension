@@ -11,6 +11,10 @@ TeaCode is a powerful app, created to write code super fast by expanding short, 
 1. Save `expand.sh` to your Home folder.
 2. Add the contents of `teacode.vim` to your `.vimrc`.
 
+```bash
+curl https://raw.githubusercontent.com/dustinknopoff/TeaCode-Vim-Extension/master/teacode.vim >> ~/.vimrc
+```
+
 ## How to use it
 
 1. Install TeaCode from https://www.apptorium.com/teacode.
