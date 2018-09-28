@@ -3,8 +3,10 @@ function! TeaCodeExpand()
 	let trigger  = getline( '.' ) 
 	let line     = line( '.' )
 	let filetype = &filetype
-	let cursor = getpos('.') " gets the current line and column
-    execute "normal! dd" " remove line expander was called on
+	" Gets the current line and column
+	let cursor = getpos('.')
+	" Remove line expander was called on
+	execute "normal! dd"
 	" Run expand function and store the results in ob
 	let ob = system( "sh ./expand.sh -e ". filetype ." -t '". trigger ."'" )
 	" Convert command response to an object by running eval function
