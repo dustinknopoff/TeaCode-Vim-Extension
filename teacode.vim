@@ -5,19 +5,25 @@ function! TeaCodeExpand()
 	let filetype = &filetype
 	" Gets the current line and column
 	let cursor = getpos('.')
+
 	" Remove line expander was called on
 	execute "normal! dd"
+
 	" Run expand function and store the results in ob
 	let ob = system( "sh ./expand.sh -e ". filetype ." -t '". trigger ."'" )
+
 	" Convert command response to an object by running eval function
 	let object = js_decode( ob )
 	let s:result = object.text
-	" report install TeaCode if error.
+
+	" Report install TeaCode if error.
 	if s:result ==? 'null'
-        echo "Could not run TeaCode. Please make sure it's installed. You can download the app from https://www.apptorium.com/teacode"
-    endif
+		echo "Could not run TeaCode. Please make sure it's installed. You can download the app from https://www.apptorium.com/teacode"
+	endif
+
 	" write to screen
 	execute "normal! i". s:result
+
 	" Loop through output text to determine final cursor line and column.
 python << EOF
 import vim
