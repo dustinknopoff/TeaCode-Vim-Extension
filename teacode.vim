@@ -2,7 +2,8 @@ function! TeaCodeExpand()
 	" Collect data
 	let trigger  = getline( '.' ) 
 	let line     = line( '.' )
-	let filetype = &filetype
+	let filetype = expand( '%:e' )
+
 	" Gets the current line and column
 	let cursor = getpos('.')
 
