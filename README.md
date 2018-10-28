@@ -20,3 +20,7 @@ curl https://raw.githubusercontent.com/dustinknopoff/TeaCode-Vim-Extension/maste
 1. Install TeaCode from https://www.apptorium.com/teacode.
 2. Open TeaCode
 3. Write an expression (for example `-f helloWorld`) and press ctrl+alt+e (notice that shortcut is different than the shortcut for native macOS apps)
+
+## Backlog
+
+See our to-do list here on Github be checking out this [link](https://github.com/dustinknopoff/TeaCode-Vim-Extension/labels/to-do). https://github.com/dustinknopoff/TeaCode-Vim-Extension/labels/to-do
