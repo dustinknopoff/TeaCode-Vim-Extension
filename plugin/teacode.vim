@@ -18,7 +18,7 @@ function! TeaCodeExpand()
 	let s:result = object.text
 
 	" Report install TeaCode if error.
-	if s:result ==? 'null'
+	if object ==? 'null'
 		echo "Could not run TeaCode. Please make sure it's installed. You can download the app from https://www.apptorium.com/teacode"
 	endif
 
@@ -46,5 +46,3 @@ EOF
 	let newcol = cursor[2] + c - 1
 	call setpos( '.', [0, newline, newcol, 0] )
 endfunction
-
-imap <C-e> <C-O>:call TeaCodeExpand()<CR>
