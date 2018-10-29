@@ -2,7 +2,6 @@ function! TeaCodeExpand()
 	" Collect data
 	let trigger  = getline( '.' ) 
 	let line     = line( '.' )
-	let filetype = expand( '%:e' )
 
 	" Gets the current line and column
 	let cursor = getpos('.')
@@ -11,14 +10,14 @@ function! TeaCodeExpand()
 	execute "normal! dd"
 
 	" Run expand function and store the results in ob
-	let ob = system( "sh ./expand.sh -e ". filetype ." -t '". trigger ."'" )
+	let ob = system( "sh ../expand.sh -e ". &ft ." -t '". trigger ."'" )
 
 	" Convert command response to an object by running eval function
 	let object = js_decode( ob )
 	let s:result = object.text
 
 	" Report install TeaCode if error.
-	if object ==? 'null'
+	if s:result ==? 'null'
 		echo "Could not run TeaCode. Please make sure it's installed. You can download the app from https://www.apptorium.com/teacode"
 	endif
 
