@@ -13,7 +13,7 @@ function! TeaCodeExpand()
 	let ob = system( "sh ../expand.sh -e ". &ft ." -t '". trigger ."'" )
 
 	" Convert command response to an object by running eval function
-	let object = js_decode( ob )
+	let object = json_decode( ob )
 	let s:result = object.text
 
 	" Report install TeaCode if error.
