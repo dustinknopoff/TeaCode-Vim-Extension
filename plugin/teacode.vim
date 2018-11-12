@@ -23,22 +23,13 @@ function! TeaCodeExpand()
 
 	" write to screen
 	execute "normal! i". s:result
-
+	let script_path = expand('<sfile>:p:h') . '/teacode.py'
+	if !has('python') and !has('python3')
+   		echo "Please re-compile vim with either python or python3"
+		finish
+	endif
+	execute (has('python3') ? 'py3file' : 'pyfile') script_path
 	" Loop through output text to determine final cursor line and column.
-python << EOF
-import vim
-string = vim.eval("s:result")
-line = 0
-column = 0
-vim.command("let l=%d"% line)
-vim.command("let c=%d"% column)
-for i in string:
-	if i is '\n':
-		line+=1
-		column = 0
-	else:
-		column += 1
-EOF
 	" Set the cursor position
 	" [bufnum, lnum, col, off]
 	let newline = line + l + 1 " add offset
