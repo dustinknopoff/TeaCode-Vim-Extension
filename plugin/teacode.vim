@@ -1,3 +1,5 @@
+let s:scriptPath = fnamemodify(resolve(expand('<sfile>:p')), ':h') 
+
 function! TeaCodeExpand()
 	" Collect data
 	let trigger  = getline( '.' ) 
@@ -11,7 +13,7 @@ function! TeaCodeExpand()
 	
 	try
 		" Run expand function and store the results in ob
-		let ob = system( "sh " . fnamemodify(resolve(expand('<sfile>:p')), ':h') . "/expand.sh -e ". &ft ." -t '". trigger ."'" )
+		let ob = system( "sh " . s:scriptPath . "/../expand.sh -e ". &ft ." -t '". trigger ."'" )
 
 		" Convert command response to an object by running eval function
 		let object = json_decode( ob )
@@ -24,7 +26,7 @@ function! TeaCodeExpand()
 
 		" write to screen
 		execute "normal! i". s:result
-		let script_path = fnamemodify(resolve(expand('<sfile>:p')), ':h') . '/python/teacode.py'
+		let script_path = s:scriptPath . '/../python/teacode.py'
 		if has('python') || has('python3')
     	execute (has('python3') ? 'py3file' : 'pyfile') script_path
 		  " Loop through output text to determine final cursor line and column.
