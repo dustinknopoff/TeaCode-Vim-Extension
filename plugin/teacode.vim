@@ -26,20 +26,23 @@ function! TeaCodeExpand()
 
 		" write to screen
 		execute "normal! i". s:result
-		let script_path = s:scriptPath . '/../python/teacode.py'
-		if has('python') || has('python3')
-    	execute (has('python3') ? 'py3file' : 'pyfile') script_path
-		  " Loop through output text to determine final cursor line and column.
-		  " Set the cursor position
-		  " [bufnum, lnum, col, off]
-		  let newline = line + l + 1 " add offset
-		  let newcol = cursor[2] + c - 1
-		  call setpos( '.', [0, newline, newcol, 0] )
-    else
-  		echo "Please re-compile vim with either python or python3"
-			finish
-		endif
-	
+		" Loop through output text to determine final cursor line and column.
+    let l = 0
+    let c = 0
+    for s:item in split(s:result, '\zs')
+      if s:item == '\n'
+        let l = l + 1
+        let c = 0
+      else
+        let c = c + 1
+      endif
+    endfor
+
+		" Set the cursor position
+		" [bufnum, lnum, col, off]
+		let newline = line + l + 1 " add offset
+		let newcol = cursor[2] + c - 1
+		call setpos( '.', [0, newline, newcol, 0] )
  catch /.*/
     echo "Caught error: " . v:exception
  endtry
