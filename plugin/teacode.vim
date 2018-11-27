@@ -1,5 +1,3 @@
-let s:scriptPath = fnamemodify(resolve(expand('<sfile>:p')), ':h') 
-
 function! TeaCodeExpand()
 	" Collect data
 	let trigger  = getline( '.' ) 
@@ -10,10 +8,11 @@ function! TeaCodeExpand()
 
 	" Remove line expander was called on
 	execute "normal! dd"
-	
+  let ntext = substitute(trigger, '\\\\', '\\\\\\\\', 'g')	
+  let ntext = substitute(ntext, '\\"', '\\\"', 'g')
 	try
 		" Run expand function and store the results in ob
-		let ob = system( "sh " . s:scriptPath . "/../expand.sh -e ". &ft ." -t '". trigger ."'" )
+		let ob = system( '/usr/bin/osascript -l JavaScript -e "Application(\"TeaCode\").expandAsJson(\"' . ntext . '\", { \"extension\": \"' . &ft . '\" })"' )
 
 		" Convert command response to an object by running eval function
 		let object = json_decode( ob )
